@@ -1,5 +1,6 @@
 namespace technical_challenge;
 using MySql.Data.MySqlClient;
+using System.Xml.Linq;
 
 public partial class Form1 : Form
 {
@@ -29,6 +30,8 @@ public partial class Form1 : Form
         list_clients.Columns.Add("Data de Nascimento", 10, HorizontalAlignment.Left);
         list_clients.Columns.Add("Bloqueado", 3, HorizontalAlignment.Left);
         list_clients.Columns.Add("Senha", 15, HorizontalAlignment.Left);
+
+        loading_clients();
     }
 
     private void label1_Click(object sender, EventArgs e)
@@ -67,22 +70,19 @@ public partial class Form1 : Form
         try
         {
             Connection = new MySqlConnection(data_source);
-
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.Connection = Connection;
-
-            cmd.CommandText = "";
-
-            string t_name = "'%" + txt_name.Text + "%'";
-
-            string sql = "SELECT * " +
-                "FROM client WHERE name LIKE" + t_name;
-
             Connection.Open();
 
-            MySqlCommand command = new MySqlCommand(sql, Connection);
+            MySqlCommand cmd = new MySqlCommand();
 
-            MySqlDataReader reader = command.ExecuteReader();
+            cmd.Connection = Connection;
+
+            cmd.CommandText = "SELECT * FROM client WHERE name LIKE @t_name";
+
+            cmd.Parameters.AddWithValue("@t_name", "%" + txt_name.Text + "%");
+
+            cmd.Prepare();
+
+            MySqlDataReader reader = cmd.ExecuteReader();
 
             list_clients.Items.Clear();
 
@@ -103,11 +103,71 @@ public partial class Form1 : Form
                     reader.GetString(11),
                     reader.GetString(12),
                 };
-                var line = new ListViewItem(row);
-                list_clients.Items.Add(line);
+                list_clients.Items.Add(new ListViewItem(row));
             };
 
             gb_filter.Visible = false;
+        }
+        catch (MySqlException ex)
+        {
+            MessageBox.Show("Erro " + ex.Number + "Ocorreu:" + ex.Message,
+                "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
+        finally
+        {
+            Connection.Close();
+        }
+    }
+
+    private void loading_clients()
+    {
+        try
+        {
+            Connection = new MySqlConnection(data_source);
+            Connection.Open();
+
+            MySqlCommand cmd = new MySqlCommand();
+
+            cmd.Connection = Connection;
+
+            cmd.CommandText = "SELECT * FROM client ORDER BY id ASC";
+
+            cmd.Prepare();
+
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            list_clients.Items.Clear();
+
+            while (reader.Read())
+            {
+                string[] row = {
+                    reader.GetString(0),
+                    reader.GetString(1),
+                    reader.GetString(2),
+                    reader.GetString(3),
+                    reader.GetString(4),
+                    reader.GetString(5),
+                    reader.GetString(6),
+                    reader.GetString(7),
+                    reader.GetString(8),
+                    reader.GetString(9),
+                    reader.GetString(10),
+                    reader.GetString(11),
+                    reader.GetString(12),
+                };
+                list_clients.Items.Add(new ListViewItem(row));
+            };
+
+            gb_filter.Visible = false;
+        }
+        catch (MySqlException ex)
+        {
+            MessageBox.Show("Erro " + ex.Number + "Ocorreu:" + ex.Message,
+                "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         catch (Exception ex)
         {
@@ -122,5 +182,14 @@ public partial class Form1 : Form
     private void button1_Click_1(object sender, EventArgs e)
     {
         gb_filter.Visible = false;
+
+        txt_name.Text = string.Empty;
+        txt_email.Text = string.Empty;
+        txt_phone.Text = string.Empty;
+        cbx_blocked.Text = string.Empty;
+        dateTimePicker1.Text = string.Empty;
+
+
+        loading_clients();
     }
 }
