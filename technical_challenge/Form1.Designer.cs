@@ -37,13 +37,13 @@ partial class Form1
         gb_filter = new GroupBox();
         button3 = new Button();
         button1 = new Button();
-        comboBox1 = new ComboBox();
+        cbx_blocked = new ComboBox();
         label6 = new Label();
         dateTimePicker1 = new DateTimePicker();
         label5 = new Label();
         label4 = new Label();
-        textBox3 = new TextBox();
-        textBox2 = new TextBox();
+        txt_phone = new TextBox();
+        txt_email = new TextBox();
         label3 = new Label();
         txt_name = new TextBox();
         label2 = new Label();
@@ -84,13 +84,13 @@ partial class Form1
         // 
         gb_filter.Controls.Add(button3);
         gb_filter.Controls.Add(button1);
-        gb_filter.Controls.Add(comboBox1);
+        gb_filter.Controls.Add(cbx_blocked);
         gb_filter.Controls.Add(label6);
         gb_filter.Controls.Add(dateTimePicker1);
         gb_filter.Controls.Add(label5);
         gb_filter.Controls.Add(label4);
-        gb_filter.Controls.Add(textBox3);
-        gb_filter.Controls.Add(textBox2);
+        gb_filter.Controls.Add(txt_phone);
+        gb_filter.Controls.Add(txt_email);
         gb_filter.Controls.Add(label3);
         gb_filter.Controls.Add(txt_name);
         gb_filter.Controls.Add(label2);
@@ -122,14 +122,14 @@ partial class Form1
         button1.UseVisualStyleBackColor = true;
         button1.Click += button1_Click_1;
         // 
-        // comboBox1
+        // cbx_blocked
         // 
-        comboBox1.FormattingEnabled = true;
-        comboBox1.Items.AddRange(new object[] { "Sim", "Não" });
-        comboBox1.Location = new Point(360, 40);
-        comboBox1.Name = "comboBox1";
-        comboBox1.Size = new Size(54, 23);
-        comboBox1.TabIndex = 11;
+        cbx_blocked.FormattingEnabled = true;
+        cbx_blocked.Items.AddRange(new object[] { "Sim", "Não" });
+        cbx_blocked.Location = new Point(360, 40);
+        cbx_blocked.Name = "cbx_blocked";
+        cbx_blocked.Size = new Size(54, 23);
+        cbx_blocked.TabIndex = 11;
         // 
         // label6
         // 
@@ -167,21 +167,21 @@ partial class Form1
         label4.TabIndex = 7;
         label4.Text = "Telefone:";
         // 
-        // textBox3
+        // txt_phone
         // 
-        textBox3.Location = new Point(226, 40);
-        textBox3.Name = "textBox3";
-        textBox3.PlaceholderText = "Telefone do Cliente";
-        textBox3.Size = new Size(111, 23);
-        textBox3.TabIndex = 6;
+        txt_phone.Location = new Point(226, 40);
+        txt_phone.Name = "txt_phone";
+        txt_phone.PlaceholderText = "Telefone do Cliente";
+        txt_phone.Size = new Size(111, 23);
+        txt_phone.TabIndex = 6;
         // 
-        // textBox2
+        // txt_email
         // 
-        textBox2.Location = new Point(9, 90);
-        textBox2.Name = "textBox2";
-        textBox2.PlaceholderText = "E-mail do Cliente";
-        textBox2.Size = new Size(199, 23);
-        textBox2.TabIndex = 5;
+        txt_email.Location = new Point(9, 90);
+        txt_email.Name = "txt_email";
+        txt_email.PlaceholderText = "E-mail do Cliente";
+        txt_email.Size = new Size(199, 23);
+        txt_email.TabIndex = 5;
         // 
         // label3
         // 
@@ -247,13 +247,13 @@ partial class Form1
     private GroupBox gb_filter;
     private TextBox txt_name;
     private Label label2;
-    private TextBox textBox2;
+    private TextBox txt_email;
     private Label label3;
     private Label label4;
-    private TextBox textBox3;
+    private TextBox txt_phone;
     private DateTimePicker dateTimePicker1;
     private Label label5;
-    private ComboBox comboBox1;
+    private ComboBox cbx_blocked;
     private Label label6;
     private Button button1;
     private Button button3;
