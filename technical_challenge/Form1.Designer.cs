@@ -213,7 +213,8 @@ partial class Form1
         // 
         list_clients.Location = new Point(21, 206);
         list_clients.Name = "list_clients";
-        list_clients.Size = new Size(788, 332);
+        list_clients.ShowGroups = false;
+        list_clients.Size = new Size(1117, 332);
         list_clients.TabIndex = 6;
         list_clients.UseCompatibleStateImageBehavior = false;
         // 
@@ -221,7 +222,7 @@ partial class Form1
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(850, 565);
+        ClientSize = new Size(1150, 565);
         Controls.Add(list_clients);
         Controls.Add(gb_filter);
         Controls.Add(button2);
